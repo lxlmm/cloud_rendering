@@ -1,0 +1,60 @@
+html, body {
+    height: 100%;
+}
+#container {
+    height: 100%;
+    border-bottom: 1px solid #d7dde4;
+    background: #f5f7f9;
+    position: relative;
+    overflow: hidden;
+}
+.ivu-layout {
+    height: 100%;
+    font-size: 15px;
+}
+.layout-logo {
+    background: transparent;
+    color: white;
+    font-size: 20px;
+}
+.layout-logo a {
+    color: white;
+    text-decoration: none;
+}
+.layout-logo a:hover{
+    color: white;
+    text-decoration: none;
+}
+.layout-nav {
+    line-height: 64px;
+    vertical-align: middle;
+}
+.ivu-layout-content {
+    border-radius: 5px;
+    padding: 24px;
+    background: #fff;
+}
+.ivu-row {
+    min-width: 120px;
+}
+.ivu-layout-content .ivu-row p {
+    line-height: 32px;
+    vertical-align: middle;
+}
+
+#user {
+    height: 60px;
+
+}
+#user p {
+    font-size: 20px;
+    line-height: 60px;
+    vertical-align: middle;
+}
+#user-img {
+    display: block;
+    width: 55px;
+    height: 55px;
+    border-radius: 100%;
+    margin: 2.5px auto;
+}

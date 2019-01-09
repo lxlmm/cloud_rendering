@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.info_system.dao.MsgDao">
+
+    <insert id="addMsg" parameterType="com.info_system.entity.Msg">
+        insert into msg(receiver, sender, theme, content, attachment, time, status) values (#{receiver}, #{sender}, #{theme}, #{content}, #{attachment}, #{time}, #{status});
+    </insert>
+
+    <select id="receiveMsg" parameterType="java.lang.String" resultType="com.info_system.entity.Msg">
+        select * from msg where receiver=#{_parameter} and status=true;
+    </select>
+
+    <select id="sendMsg" parameterType="java.lang.String" resultType="com.info_system.entity.Msg">
+        select * from msg where sender=#{_parameter} and status=true;
+    </select>
+
+    <select id="draftMsg" parameterType="java.lang.String" resultType="com.info_system.entity.Msg">
+        select * from msg where sender=#{_parameter} and status=false ;
+    </select>
+
+    <select id="getMsg" parameterType="int" resultType="com.info_system.entity.Msg">
+        select * from msg where id=#{_parameter};
+    </select>
+
+    <update id="readMsg" parameterType="int">
+        update msg set isRead=true where id=#{_parameter};
+    </update>
+
+    <update id="updateMsg" parameterType="com.info_system.entity.Msg">
+        update msg set receiver=#{receiver}, sender=#{sender}, theme=#{theme}, content=#{content}, attachment=#{attachment}, time=#{time}, status=#{status} where id=#{id};
+    </update>
+
+</mapper>

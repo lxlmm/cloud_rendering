@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.info_system.dao.UserDao">
+
+    <resultMap id="userMap" type="com.info_system.entity.User">
+        <id property="id" column="user_id"/>
+        <result property="username" column="user_name"/>
+        <result property="password" column="user_password"/>
+        <result property="deleteFlag" column="delete_flag"/>
+        <result property="adminFlag" column="admin_flag"/>
+        <result property="userPic" column="user_pic"/>
+    </resultMap>
+    <insert id="addUser" parameterType="com.info_system.entity.User">
+        insert into t_user(user_name, user_password) values (#{username}, #{password})
+    </insert>
+
+    <select id="checkUser" parameterType="java.lang.String"  resultType="int">
+        select count(*) from t_user where user_name = #{0};
+    </select>
+
+    <select id="checkLogin" parameterType="java.lang.String" resultType="java.lang.String">
+        select user_password from t_user where user_name = #{0};
+    </select>
+
+    <select id="listMsg" parameterType="java.lang.String" resultType="com.info_system.entity.User">
+        select * from t_user where user_name != #{0};
+    </select>
+
+    <select id="getUserByName" parameterType="java.lang.String" resultMap="userMap">
+        select
+        *
+         from t_user where t_user.user_name=#{0}
+    </select>
+
+    <select id="getUserById" parameterType="java.lang.Integer" resultMap="userMap">
+        select * from t_user where user_id=#{0}
+    </select>
+
+
+</mapper>

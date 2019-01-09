@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.info_system.dao.FollowDao">
+
+    <resultMap id="followMap" type="com.info_system.entity.Follow">
+        <id property="followId" column="follow_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="followerId" column="follower_id"/>
+        <association property="username" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getUsernameById"/>
+        <association property="blogNum" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getBlogNum"/>
+        <association property="fansNum" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getFansNum"/>
+        <association property="followNum" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getFollowNum"/>
+    </resultMap>
+
+    <resultMap id="fansMap" type="com.info_system.entity.Follow">
+        <id property="followId" column="follow_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="followerId" column="follower_id"/>
+        <association property="username" column="follower_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getUsernameById"/>
+        <association property="blogNum" column="follower_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getBlogNum"/>
+        <association property="fansNum" column="follower_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getFansNum"/>
+        <association property="followNum" column="follower_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getFollowNum"/>
+    </resultMap>
+
+    <resultMap id="unFollowMap" type="com.info_system.entity.Follow">
+        <id property="followId" column="user_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="followerId" column="user_id"/>
+        <result property="username" column="user_name" />
+        <association property="blogNum" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getBlogNum"/>
+        <association property="fansNum" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getFansNum"/>
+        <association property="followNum" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getFollowNum"/>
+    </resultMap>
+
+    <!--我关注的人-->
+    <select id="listFollow" parameterType="java.lang.Integer" resultMap="followMap">
+        select * from t_follow where follower_id = #{0} order by follow_id desc;
+    </select>
+
+    <!--关注我的人-->
+    <select id="listFans" parameterType="java.lang.Integer" resultMap="fansMap">
+        select * from t_follow where user_id = #{0} order by follow_id desc;
+    </select>
+
+    <!--unFollow-->
+    <select id="listUnFollow" resultMap="unFollowMap">
+        select * from t_user where user_name like #{username} and user_id!=#{userId} and user_id not in (select t_follow.user_id from t_follow where t_follow.follower_id=#{userId}) order by user_name;
+    </select>
+
+
+    <!--fansNum-->
+    <select id="getFansNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from t_follow where user_id = #{0};
+    </select>
+
+    <!--followNum-->
+    <select id="getFollowNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from t_follow where follow_id = #{0};
+    </select>
+
+    <!--blogNum-->
+    <select id="getBlogNum" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from t_blog where user_id = #{0};
+    </select>
+
+    <!--username-->
+    <select id="getUsernameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select user_name from t_user where user_id = #{0};
+    </select>
+
+    <delete id="deleteFollow" parameterType="java.lang.Integer">
+        delete from t_follow where follow_id=#{followId};
+    </delete>
+
+    <insert id="addFollow" parameterType="com.info_system.entity.Follow">
+        insert into t_follow (follower_id, user_id) values (#{followerId}, #{userId});
+    </insert>
+
+</mapper>

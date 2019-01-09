@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.info_system.dao.BanUserDao">
+    <resultMap id="UserMap" type="com.info_system.entity.User">
+        <id property="id" column="user_id"></id>
+        <result property="username" column="user_name"></result>
+        <result property="deleteFlag" column="delete_flag"></result>
+        <association property="fansNum" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getFansNum"/>
+        <association property="blogNum" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getBlogNum"/>
+        <association property="followNum" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.FollowDao.getFollowNum"/>
+    </resultMap>
+
+    <resultMap id="BlogMap" type="com.info_system.entity.Blog">
+        <id property="blogId" column="blog_id"></id>
+        <result property="blogTitle" column="blog_title"></result>
+        <result property="deleteFlag" column="delete_flag"></result>
+        <association property="username" column="user_id" javaType="java.lang.Integer" select="com.info_system.dao.BanUserDao.getUsernameById"/>
+        <association property="likeCount" column="blog_id" javaType="java.lang.Integer" select="com.info_system.dao.BlogDao.getLikeCountByBlogId"/>
+        <association property="commentCount" column="blog_id" javaType="java.lang.Integer" select="com.info_system.dao.BlogDao.getCommentCountByBlogId"/>
+    </resultMap>
+
+    <select id="listUser" resultMap="UserMap">
+        select * from t_user where admin_flag!=1 order by user_name;
+    </select>
+
+    <select id="listBlog" resultMap="BlogMap">
+        select * from t_blog;
+    </select>
+
+    <select id="getUserAllBlogs" resultMap="BlogMap">
+        select * from t_blog where user_id=#{0};
+    </select>
+
+    <select id="getUsernameById" resultType="java.lang.String">
+        select user_name from t_user where user_id=#{0};
+    </select>
+
+    <select id="getUserIdByBlogId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select user_id from t_blog where blog_id=#{0};
+    </select>
+
+    <update id="changeBlog" parameterType="com.info_system.entity.Blog">
+        update t_blog set delete_flag=#{deleteFlag} where blog_id=#{blogId};
+    </update>
+
+    <update id="changeUser" parameterType="com.info_system.entity.User">
+        update t_user set delete_flag=#{deleteFlag} where user_id=#{id};
+    </update>
+
+    <insert id="createBan">
+        insert into t_ban (admin_id,user_id) values (#{admin_id}, #{user_id});
+    </insert>
+
+    <insert id="createDel">
+        insert into t_del (admin_id,blog_id) values (#{admin_id}, #{blog_id});
+    </insert>
+
+    <delete id="delBan">
+        delete from t_ban where admin_id=#{admin_id} and user_id=#{user_id};
+    </delete>
+
+    <delete id="delDel">
+        delete from t_del where admin_id=#{admin_id} and blog_id=#{blog_id};
+    </delete>
+</mapper>

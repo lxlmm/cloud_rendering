@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.info_system.dao.MessageDao">
+    <resultMap id="messageMap" type="com.info_system.entity.Message">
+        <id property="messageId" column="message_id"></id>
+        <result property="userId" column="user_id"></result>
+        <result property="senderId" column="sender_id"></result>
+        <result property="messageType" column="message_type"></result>
+        <result property="blogId" column="blog_id"></result>
+        <association property="blogName" column="blog_id" javaType="java.lang.Integer" select="com.info_system.dao.MessageDao.getBlogName"/>
+        <association property="senderName" column="sender_id" javaType="java.lang.Integer" select="com.info_system.dao.MessageDao.getSenderName"/>
+    </resultMap>
+
+    <insert id="addMessage" parameterType="com.info_system.entity.Message">
+        insert into t_message(user_id,sender_id,message_type) values(#{userId},#{senderId},#{messageType});
+    </insert>
+
+    <select id="listMessage" parameterType="java.lang.Integer" resultMap="messageMap">
+        select * from t_message where user_id=#{userId} order by message_id desc;
+    </select>
+
+    <select id="getSenderName" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select user_name from t_user where user_id=#{0};
+    </select>
+
+    <select id="getBlogName" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select blog_title from t_blog where blog_id=#{0};
+    </select>
+</mapper>
