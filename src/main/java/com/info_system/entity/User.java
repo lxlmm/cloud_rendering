@@ -7,6 +7,9 @@ public class User {
     private int deleteFlag;
     private int adminFlag;
     private int fansNum;
+    private String userPic;
+    private int followNum;
+    private int blogNum;
 
     public String getUserPic() {
         return userPic;
@@ -16,7 +19,6 @@ public class User {
         this.userPic = userPic;
     }
 
-    private String userPic;
 
 
 
@@ -34,7 +36,6 @@ public class User {
         this.followNum = followNum;
     }
 
-    private int followNum;
 
 
 
@@ -54,7 +55,6 @@ public class User {
         this.blogNum = blogNum;
     }
 
-    private int blogNum;
 
 
 
