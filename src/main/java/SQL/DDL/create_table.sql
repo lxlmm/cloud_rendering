@@ -25,7 +25,9 @@ CREATE TABLE `t_blog` (
                           `blog_title` varchar(10) NOT NULL,
                           `user_id` int(11),
                           `blog_content` varchar(1024) ,
-                          `blog_pic` varchar(1024) ,
+                          `before_blog_pic` varchar(1024) ,
+                          `blog_preview_pic` varchar(1024) ,
+                          `after_blog_pic` varchar(1024) ,
                           `delete_flag` int(1) ,
                           `blog_time` date DEFAULT NULL ,
                           PRIMARY KEY (`blog_id`)

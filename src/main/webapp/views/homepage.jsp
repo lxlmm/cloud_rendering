@@ -50,10 +50,10 @@
                             </i-col>
                         </row>
                     </div>
-                    <menu-item name="home">
-                        <Icon type="md-home" ></Icon>
-                        任务广场
-                    </menu-item>
+<%--                    <menu-item name="home">--%>
+<%--                        <Icon type="md-home" ></Icon>--%>
+<%--                        任务广场--%>
+<%--                    </menu-item>--%>
                     <menu-item name="sendBlog">
                         <Icon type="ios-create" ></Icon>
                         创建任务
@@ -62,31 +62,31 @@
                         <Icon type="ios-bookmarks" ></Icon>
                         我的任务
                     </menu-item>
-                    <menu-item name="myComment">
-                        <Icon type="ios-document" ></Icon>
-                        我的评论
-                    </menu-item>
-                    <menu-item name="focusPer">
-                        <Icon type="ios-disc" ></Icon>
-                        关注的人
-                    </menu-item>
-                    <menu-item name="focusMe">
-                        <Icon type="ios-contacts" ></Icon>
-                        关注我的人
-                    </menu-item>
-                    <menu-item name="message">
-                        <Icon type="md-mail" ></Icon>
-                        消息
-                    </menu-item>
-                    <%--管理员的权限--%>
-                    <menu-item name="blacklist" v-if="user.adminFlag==1">
-                        <Icon type="ios-clipboard" ></Icon>
-                        黑名单
-                    </menu-item>
-                    <menu-item name="blackBlog" v-if="user.adminFlag==1">
-                        <Icon type="ios-trash" ></Icon>
-                        管理渲染任务
-                    </menu-item>
+<%--                    <menu-item name="myComment">--%>
+<%--                        <Icon type="ios-document" ></Icon>--%>
+<%--                        我的评论--%>
+<%--                    </menu-item>--%>
+<%--                    <menu-item name="focusPer">--%>
+<%--                        <Icon type="ios-disc" ></Icon>--%>
+<%--                        关注的人--%>
+<%--                    </menu-item>--%>
+<%--                    <menu-item name="focusMe">--%>
+<%--                        <Icon type="ios-contacts" ></Icon>--%>
+<%--                        关注我的人--%>
+<%--                    </menu-item>--%>
+<%--                    <menu-item name="message">--%>
+<%--                        <Icon type="md-mail" ></Icon>--%>
+<%--                        消息--%>
+<%--                    </menu-item>--%>
+<%--                    &lt;%&ndash;管理员的权限&ndash;%&gt;--%>
+<%--                    <menu-item name="blacklist" v-if="user.adminFlag==1">--%>
+<%--                        <Icon type="ios-clipboard" ></Icon>--%>
+<%--                        黑名单--%>
+<%--                    </menu-item>--%>
+<%--                    <menu-item name="blackBlog" v-if="user.adminFlag==1">--%>
+<%--                        <Icon type="ios-trash" ></Icon>--%>
+<%--                        管理渲染任务--%>
+<%--                    </menu-item>--%>
                 </i-menu>
             </sider>
             <layout  style="height: 100%">
@@ -125,7 +125,7 @@
     var app = new Vue({
         el: "#app",
         data:{
-            page:"<%=basePath%>/info_system/home",
+            page:"<%=basePath%>/info_system/myBlogs",
             title:"我的任务",
             importModel:{
                 title:"",

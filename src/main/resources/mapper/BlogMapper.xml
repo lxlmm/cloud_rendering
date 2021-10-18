@@ -10,7 +10,9 @@
         <result property="blogContent" column="blog_content"/>
         <result property="blogTime" column="blog_time"/>
         <result property="deleteFlag" column="delete_flag"/>
-        <result property="blogPic" column="blog_pic"/>
+        <result property="beforeBlogPic" column="before_blog_pic"/>
+        <result property="afterBlogPic" column="after_blog_pic"/>
+        <result property="blogPreviewPic" column="blog_preview_pic"/>
         <association property="likeCount" column="blog_id" javaType="java.lang.Integer" select="com.info_system.dao.BlogDao.getLikeCountByBlogId"/>
         <association property="commentCount" column="blog_id" javaType="java.lang.Integer" select="com.info_system.dao.BlogDao.getCommentCountByBlogId"/>
         <association property="user" column="user_id" javaType="com.info_system.entity.User" select="com.info_system.dao.UserDao.getUserById"/>
@@ -65,7 +67,7 @@
     </select>
 
     <insert id="addBlog" parameterType="com.info_system.entity.Blog" useGeneratedKeys="true" keyProperty="blogId">
-        insert into t_blog(blog_title,blog_content,user_id,blog_time,delete_flag,blog_pic) values(#{blogTitle},#{blogContent},#{user.id},#{blogTime},1,#{blogPic})
+        insert into t_blog(blog_title,blog_content,user_id,blog_time,delete_flag,before_blog_pic,after_blog_pic,blog_preview_pic) values(#{blogTitle},#{blogContent},#{user.id},#{blogTime},1,#{beforeBlogPic},#{afterBlogPic},#{blogPreviewPic})
     </insert>
 
     <select id="getBlogById" parameterType="java.lang.Integer" resultMap="blogMap">
@@ -91,8 +93,8 @@
           blog_time=#{blogTime}
         </if>
 
-        <if test="blogPic!=null">
-            blog_pic=#{blogPic}
+        <if test="beforeBlogPic!=null">
+            before_blog_pic=#{beforeBlogPic}
         </if>
 
         <if test="deleteFlag!=null">

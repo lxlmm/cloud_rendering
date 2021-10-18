@@ -1,17 +1,25 @@
 package com.info_system.entity;
 
+
 import java.util.Date;
 import java.util.List;
 
-public class Blog implements Comparable<Blog>{
+public class Blog implements Comparable<Blog> {
     private int blogId;
     private String blogTitle;
     private String blogContent;
     private User user;
     private Date blogTime;
     private int deleteFlag;
+    private String beforeBlogPic;
+    private String afterBlogPic;
+    private String blogPreviewPic;
+    private String username;
+    private int likeCount;
+    private int commentCount;
+    private boolean hasLike;//判断当前用户是否有点赞该博文
+    private boolean hasComment;//判断当前用户是否有评论该博文
 
-    private String blogPic;
     public Blog() {
         super();
     }
@@ -24,14 +32,11 @@ public class Blog implements Comparable<Blog>{
         this.blogId = blogId;
         this.deleteFlag = deleteFlag;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
 
-    private String username;
-
-    private boolean hasLike;//判断当前用户是否有点赞该博文
-    private boolean hasComment;//判断当前用户是否有评论该博文
 
     public List<User> getInformUser() {
         return informUser;
@@ -60,8 +65,6 @@ public class Blog implements Comparable<Blog>{
         this.hasComment = hasComment;
     }
 
-    private int likeCount;
-    private int commentCount;
 
     public int getLikeCount() {
         return likeCount;
@@ -79,13 +82,6 @@ public class Blog implements Comparable<Blog>{
         this.commentCount = commentCount;
     }
 
-    public String getBlogPic() {
-        return blogPic;
-    }
-
-    public void setBlogPic(String blogPic) {
-        this.blogPic = blogPic;
-    }
 
     public int getBlogId() {
         return blogId;
@@ -145,7 +141,9 @@ public class Blog implements Comparable<Blog>{
                 ", user=" + user +
                 ", blogTime=" + blogTime +
                 ", deleteFlag=" + deleteFlag +
-                ", blogPic='" + blogPic + '\'' +
+                ", beforeblogPic='" + beforeBlogPic + '\'' +
+                ", afterblogPic='" + afterBlogPic + '\'' +
+                ", blogPreviewPic='" + blogPreviewPic + '\'' +
                 ", username='" + username + '\'' +
                 ", hasLike=" + hasLike +
                 ", hasComment=" + hasComment +
@@ -155,8 +153,32 @@ public class Blog implements Comparable<Blog>{
                 '}';
     }
 
-//排序方法
+    //排序方法
     public int compareTo(Blog o) {
-        return likeCount<o.getLikeCount()?1:(likeCount>o.getLikeCount()?-1:0);
+        return likeCount < o.getLikeCount() ? 1 : (likeCount > o.getLikeCount() ? -1 : 0);
+    }
+
+    public String getBlogPreviewPic() {
+        return blogPreviewPic;
+    }
+
+    public void setBlogPreviewPic(String blogPreviewPic) {
+        this.blogPreviewPic = blogPreviewPic;
+    }
+
+    public String getBeforeBlogPic() {
+        return beforeBlogPic;
+    }
+
+    public void setBeforeBlogPic(String beforeBlogPic) {
+        this.beforeBlogPic = beforeBlogPic;
+    }
+
+    public String getAfterBlogPic() {
+        return afterBlogPic;
+    }
+
+    public void setAfterBlogPic(String afterBlogPic) {
+        this.afterBlogPic = afterBlogPic;
     }
 }

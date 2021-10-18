@@ -783,15 +783,19 @@ public class FileUtils extends org.apache.commons.io.FileUtils{
         {
             dir.mkdirs();
         }
-        String ext= getFileExtension(file.getOriginalFilename());
-        String fileName=IdGen.uuid()+"."+ext;
+        String fileName=geneFileName(file);
         try {
             file.transferTo(new File(dir+File.separator+fileName));
         } catch (IOException e) {
             e.printStackTrace();
             return null;
         }
-        return directory+fileName;
+        return fileName;
     }
 
+    public static  String geneFileName(MultipartFile file){
+        String ext= getFileExtension(file.getOriginalFilename());
+        String fileName=IdGen.uuid()+"."+ext;
+        return fileName;
+    }
 }

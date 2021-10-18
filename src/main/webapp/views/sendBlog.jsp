@@ -43,7 +43,7 @@
                                 <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
                                 <p>点击或将文件拖拽到这里上传</p>
                             </div>
-                            <p style="color: red">PS:目前只支持.Giraffe文件的渲染</p>
+                            <p style="color: red">PS:目前只支持.stl文件的渲染</p>
                         </Upload>
                         <div v-if="hasPic">上传成功！</div>
                     </div>
