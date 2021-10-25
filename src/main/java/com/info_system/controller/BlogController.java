@@ -6,7 +6,7 @@ import com.info_system.entity.*;
 import com.info_system.service.BlogService;
 import com.info_system.service.UserService;
 import com.info_system.utils.FileUtils;
-import com.info_system.utils.PythonUtil;
+import com.info_system.utils.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -446,8 +446,11 @@ public class BlogController {
 //        String path = request.getContextPath();
 //        String basePath = request.getScheme() + "://"+ request.getServerName() + ":" + request.getServerPort() + path ;
         //模拟文件，myfile.txt为需要下载的文件
-        String fileName = request.getSession().getServletContext().getRealPath(blog.getBeforeBlogPic());
-        PythonUtil.exec(new String[]{"python", "D:\\pyProject\\cloud_renderer\\render_stl.py", fileName});
+        String filePath = blog.getBeforeBlogPic();
+        Map<String, String> param = new HashMap<String, String>();
+        param.put("file_path", filePath);
+        HttpClientUtil.request("http://127.0.0.1:5000/render", param);
+//        PythonUtil.exec(new String[]{"python", "D:\\pyProject\\cloud_renderer\\render_stl.py", fileName});
         return new AjaxMessage().Set(MsgType.Success, "已发起渲染！", null);
     }
 

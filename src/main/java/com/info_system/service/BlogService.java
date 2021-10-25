@@ -37,11 +37,12 @@ public class BlogService {
         String afterRenderFileName = "";
         String previewFileName = "";
         if (file != null) {
-            String directory = "/upload/model/" + user.getId() + "/";
-            String fileName = FileUtils.writeToServer(request, directory + "beforerender/", file);
-            beforeRenderFileName = directory + "beforerender/" + fileName;
-            afterRenderFileName = directory + "afterrender/" + fileName;// 渲染后文件格式待定
-            previewFileName = directory + "preview/" + fileName.replace(".stl", ".png");
+            String directory = "D:/ftp/upload/model/" + user.getId() + "/";
+            String fileName = FileUtils.writeToServer(request, directory, file);
+            beforeRenderFileName = directory  + fileName;
+            String[] fileNames=fileName.split("\\.");
+            afterRenderFileName = directory  + fileNames[0]+".combine."+fileNames[1];// 渲染后文件格式待定
+            previewFileName = directory +  fileNames[0]+".combine."+"png";
         }
 
         JSONObject obj = JSONObject.parseObject(param);
