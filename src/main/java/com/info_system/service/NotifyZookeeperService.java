@@ -10,7 +10,7 @@ import java.util.Map;
 public class NotifyZookeeperService {
 
     public void notify(String path, Map data) {
-        ZkClient zk = new ZkClient("172.30.242.36:2182,172.30.242.37:2182,172.30.242.38:2182", 5000);
+        ZkClient zk = new ZkClient("path", 5000);
 //        zk.createPersistent(path);
         String jsonstr = JSONObject.toJSONString(data);
         zk.writeData(path, jsonstr);

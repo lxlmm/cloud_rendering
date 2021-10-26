@@ -14,7 +14,7 @@ public class ListenZookeeperService {
     static {
 
         logger.error("start listen zookeeper");
-        ZkClient client = new ZkClient("172.30.242.36:2182,172.30.242.37:2182,172.30.242.38:2182", 5000);
+        ZkClient client = new ZkClient("path", 5000);
         ZookeeperDataListenerImpl listener = new ZookeeperDataListenerImpl();
         client.subscribeDataChanges(listenPath, listener);//监听对应路径的值改变事件
 
